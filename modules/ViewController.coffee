@@ -128,6 +128,10 @@ class module.exports extends Layer
 					to: {maxX: 0}
 				newView:
 					to: {}
+			androidPushIn:
+				newView:
+					from: {y: @height/5, opacity: 0}
+					to: {y: 0, opacity: 1}
 
 		# shortcuts
 		transitions.slideIn = transitions.slideInRight
