@@ -89,22 +89,30 @@ Views = new ViewController
 
 sketch.navbar.z = 1
 
-sketch.vendita1_button.onClick -> Views.zoomIn(sketch.vendita2)
+sketch.vendita1_button.onClick -> Views.androidPushIn(sketch.vendita2)
 
-#QR Animations setup
+#Schermata 2 setup
+for key in sketch.vendita2_bottomsheet_grid.children
+	do (key) ->
+		key.onClick -> Views.zoomIn(sketch.vendita3)
+		
+sketch.vendita2_back.onClick ->
+	Views.back()
+
+#Schermata 3 setup
 circlePulse = null
 
-sketch.vendita2_QRcode.states.add
+sketch.vendita3_QRcode.states.add
 	hidden:
 		scale: 0
 				
 Views.onViewWillSwitch (oldView, newView) ->
-	if newView is sketch.vendita2
-		sketch.vendita2_QRcode.states.switchInstant("hidden")
-		sketch.vendita2_QRcode.states.switch("default", curve: "bezier-curve", curveOptions: [0.0, 0.0, 0.2, 1], time: 0.375)
+	if newView is sketch.vendita3
+		sketch.vendita3_QRcode.states.switchInstant("hidden")
+		sketch.vendita3_QRcode.states.switch("default", curve: "bezier-curve", curveOptions: [0.0, 0.0, 0.2, 1], time: 0.375)
 
 Views.onViewDidSwitch (oldView, newView) ->
-	if newView is sketch.vendita2
+	if newView is sketch.vendita3
 		circlePulse = new Layer
 			name: "circlePulse"
 			x: -560
@@ -115,7 +123,7 @@ Views.onViewDidSwitch (oldView, newView) ->
 			borderRadius: 1100
 			backgroundColor: "rgba(255,255,255,1)"
 			opacity: 1
-			superLayer: sketch.vendita2
+			superLayer: sketch.vendita3
 			scale: 0.44
 		circlePulse.animate
 			properties:
@@ -126,7 +134,7 @@ Views.onViewDidSwitch (oldView, newView) ->
 			repeat: 10000
 			time: 2
 			
-sketch.vendita2_close.onClick ->
+sketch.vendita3_close.onClick ->
 	Views.back()
 	circlePulse.destroy()
 
