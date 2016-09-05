@@ -102,14 +102,27 @@ sketch.vendita2_back.onClick ->
 #Schermata 3 setup
 circlePulse = null
 
-sketch.vendita3_QRcode.states.add
-	hidden:
-		scale: 0
-				
+for layer in [sketch.vendita3_QRcode, sketch.vendita3_check, sketch.vendita3_label_id, sketch.vendita3_label_info, sketch.vendita3_label_success]
+	do (layer) ->
+		layer.states.add
+			hidden:
+				scale: 0
+				opacity: 0
+			
 Views.onViewWillSwitch (oldView, newView) ->
 	if newView is sketch.vendita3
+		sketch.vendita3_check.states.switchInstant("hidden")
 		sketch.vendita3_QRcode.states.switchInstant("hidden")
+		sketch.vendita3_label_success.states.switchInstant("hidden")
+		sketch.vendita3_label_id.states.switchInstant("default")
+		sketch.vendita3_label_info.states.switchInstant("default")
 		sketch.vendita3_QRcode.states.switch("default", curve: "bezier-curve", curveOptions: [0.0, 0.0, 0.2, 1], time: 0.375)
+		Utils.delay 4, ->
+			sketch.vendita3_check.states.switch("default", curve: "bezier-curve", curveOptions: [0.0, 0.0, 0.2, 1], time: 0.375)
+			sketch.vendita3_label_success.states.switch("default", curve: "bezier-curve", curveOptions: [0.0, 0.0, 0.2, 1], time: 0.375)
+			sketch.vendita3_QRcode.states.switch("hidden", curve: "bezier-curve", curveOptions: [0.0, 0.0, 0.2, 1], time: 0.375)
+			sketch.vendita3_label_id.states.switch("hidden", curve: "bezier-curve", curveOptions: [0.0, 0.0, 0.2, 1], time: 0.375)
+			sketch.vendita3_label_info.states.switch("hidden", curve: "bezier-curve", curveOptions: [0.0, 0.0, 0.2, 1], time: 0.375)
 
 Views.onViewDidSwitch (oldView, newView) ->
 	if newView is sketch.vendita3
@@ -131,10 +144,9 @@ Views.onViewDidSwitch (oldView, newView) ->
 				opacity: 0
 			curve: "bezier-curve"
 			curveOptions: [0.0, 0.0, 0.2, 1]
-			repeat: 10000
+			repeat: 1
 			time: 2
 			
 sketch.vendita3_close.onClick ->
 	Views.back()
 	circlePulse.destroy()
-
