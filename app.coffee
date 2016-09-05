@@ -87,7 +87,7 @@ sketch.del.onClick ->
 Views = new ViewController
     initialView: sketch.vendita1
 
-sketch.navbar.z = 1
+sketch.navbar.bringToFront()
 
 sketch.vendita1_button.onClick -> Views.androidPushIn(sketch.vendita2)
 
