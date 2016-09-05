@@ -522,7 +522,7 @@ window.__imported__["DropPay Mockups - Android@3x/layers.json.js"] = [
 		]
 	},
 	{
-		"objectId": "C54CB685-484B-415D-8369-DCC961963F28",
+		"objectId": "19AC608E-DC85-4EB2-A1FE-B7490F4E9DE5",
 		"kind": "artboard",
 		"name": "vendita2",
 		"maskFrame": null,
@@ -534,12 +534,186 @@ window.__imported__["DropPay Mockups - Android@3x/layers.json.js"] = [
 		},
 		"visible": true,
 		"metadata": {},
+		"backgroundColor": "rgba(255, 255, 255, 1)",
+		"children": [
+			{
+				"objectId": "C15C3308-4913-4DE3-90B9-45575A8429AB",
+				"kind": "group",
+				"name": "vendita2_bottomsheet_grid",
+				"maskFrame": null,
+				"layerFrame": {
+					"x": 0,
+					"y": 442,
+					"width": 360,
+					"height": 150
+				},
+				"visible": true,
+				"metadata": {
+					"opacity": 1
+				},
+				"image": {
+					"path": "images/Layer-vendita2_bottomsheet_grid-qze1qzmz.png",
+					"frame": {
+						"x": 0,
+						"y": 442,
+						"width": 360,
+						"height": 150
+					}
+				},
+				"children": [
+					{
+						"objectId": "938163AC-FAAF-4F06-82AE-D10FA2641A99",
+						"kind": "group",
+						"name": "button_DropPay",
+						"maskFrame": null,
+						"layerFrame": {
+							"x": 180,
+							"y": 472,
+							"width": 164,
+							"height": 104
+						},
+						"visible": true,
+						"metadata": {
+							"opacity": 1
+						},
+						"image": {
+							"path": "images/Layer-button_DropPay-otm4mtyz.png",
+							"frame": {
+								"x": 180,
+								"y": 472,
+								"width": 164,
+								"height": 104
+							}
+						},
+						"children": []
+					},
+					{
+						"objectId": "102C7C54-4B60-4350-B9A1-F67E096FE958",
+						"kind": "group",
+						"name": "button_POS",
+						"maskFrame": null,
+						"layerFrame": {
+							"x": 16,
+							"y": 472,
+							"width": 164,
+							"height": 104
+						},
+						"visible": true,
+						"metadata": {
+							"opacity": 1
+						},
+						"image": {
+							"path": "images/Layer-button_POS-mtayqzdd.png",
+							"frame": {
+								"x": 16,
+								"y": 472,
+								"width": 164,
+								"height": 104
+							}
+						},
+						"children": []
+					}
+				]
+			},
+			{
+				"objectId": "AF790F53-A808-42E9-B81A-E02482DA51E5",
+				"kind": "group",
+				"name": "vendita2_fields",
+				"maskFrame": null,
+				"layerFrame": {
+					"x": 20,
+					"y": 110,
+					"width": 324,
+					"height": 26
+				},
+				"visible": true,
+				"metadata": {
+					"opacity": 1
+				},
+				"image": {
+					"path": "images/Layer-vendita2_fields-quy3otbg.png",
+					"frame": {
+						"x": 20,
+						"y": 110,
+						"width": 324,
+						"height": 26
+					}
+				},
+				"children": []
+			},
+			{
+				"objectId": "A6F9E21D-119B-4444-9433-333AE253B17B",
+				"kind": "group",
+				"name": "vendita2_back",
+				"maskFrame": null,
+				"layerFrame": {
+					"x": 20,
+					"y": 44,
+					"width": 16,
+					"height": 16
+				},
+				"visible": true,
+				"metadata": {
+					"opacity": 1
+				},
+				"image": {
+					"path": "images/Layer-vendita2_back-qtzgouuy.png",
+					"frame": {
+						"x": 20,
+						"y": 44,
+						"width": 16,
+						"height": 16
+					}
+				},
+				"children": []
+			},
+			{
+				"objectId": "970AD706-D6B6-4770-8490-C87AF7D38A3C",
+				"kind": "group",
+				"name": "vendita2_appbar",
+				"maskFrame": null,
+				"layerFrame": {
+					"x": -4,
+					"y": -4,
+					"width": 368,
+					"height": 92
+				},
+				"visible": true,
+				"metadata": {
+					"opacity": 1
+				},
+				"image": {
+					"path": "images/Layer-vendita2_appbar-otcwquq3.png",
+					"frame": {
+						"x": -4,
+						"y": -4,
+						"width": 368,
+						"height": 92
+					}
+				},
+				"children": []
+			}
+		]
+	},
+	{
+		"objectId": "C54CB685-484B-415D-8369-DCC961963F28",
+		"kind": "artboard",
+		"name": "vendita3",
+		"maskFrame": null,
+		"layerFrame": {
+			"x": 1400,
+			"y": 66,
+			"width": 360,
+			"height": 640
+		},
+		"visible": true,
+		"metadata": {},
 		"backgroundColor": "rgba(23.969999999999995, 167.79, 239.70000000000002, 1)",
 		"children": [
 			{
 				"objectId": "2E65156A-14DB-4401-8989-117334987AB0",
 				"kind": "text",
-				"name": "vendita2_labe_info",
+				"name": "vendita3_label_info",
 				"maskFrame": null,
 				"layerFrame": {
 					"x": 67,
@@ -560,7 +734,7 @@ window.__imported__["DropPay Mockups - Android@3x/layers.json.js"] = [
 					]
 				},
 				"image": {
-					"path": "images/Layer-vendita2_labe_info-mku2nte1.png",
+					"path": "images/Layer-vendita3_label_info-mku2nte1.png",
 					"frame": {
 						"x": 67,
 						"y": 497,
@@ -573,7 +747,7 @@ window.__imported__["DropPay Mockups - Android@3x/layers.json.js"] = [
 			{
 				"objectId": "396B696D-748D-4CB5-A0C2-DA358F6CF1CE",
 				"kind": "text",
-				"name": "vendita2_label_id",
+				"name": "vendita3_label_id",
 				"maskFrame": null,
 				"layerFrame": {
 					"x": 87,
@@ -594,7 +768,7 @@ window.__imported__["DropPay Mockups - Android@3x/layers.json.js"] = [
 					]
 				},
 				"image": {
-					"path": "images/Layer-vendita2_label_id-mzk2qjy5.png",
+					"path": "images/Layer-vendita3_label_id-mzk2qjy5.png",
 					"frame": {
 						"x": 87,
 						"y": 115,
@@ -607,7 +781,7 @@ window.__imported__["DropPay Mockups - Android@3x/layers.json.js"] = [
 			{
 				"objectId": "88DC0BB3-B7A7-4AE2-A9E2-3BF45610DA76",
 				"kind": "group",
-				"name": "vendita2_QRcode",
+				"name": "vendita3_QRcode",
 				"maskFrame": {
 					"x": 0,
 					"y": 0,
@@ -625,7 +799,7 @@ window.__imported__["DropPay Mockups - Android@3x/layers.json.js"] = [
 					"opacity": 1
 				},
 				"image": {
-					"path": "images/Layer-vendita2_QRcode-odheqzbc.png",
+					"path": "images/Layer-vendita3_QRcode-odheqzbc.png",
 					"frame": {
 						"x": 13,
 						"y": 145,
@@ -638,7 +812,7 @@ window.__imported__["DropPay Mockups - Android@3x/layers.json.js"] = [
 			{
 				"objectId": "315B31C9-55F2-4F6E-A639-DB7BBA71315F",
 				"kind": "group",
-				"name": "vendita2_close",
+				"name": "vendita3_close",
 				"maskFrame": null,
 				"layerFrame": {
 					"x": 21,
@@ -651,7 +825,7 @@ window.__imported__["DropPay Mockups - Android@3x/layers.json.js"] = [
 					"opacity": 1
 				},
 				"image": {
-					"path": "images/Layer-vendita2_close-mze1qjmx.png",
+					"path": "images/Layer-vendita3_close-mze1qjmx.png",
 					"frame": {
 						"x": 21,
 						"y": 45,
@@ -664,7 +838,7 @@ window.__imported__["DropPay Mockups - Android@3x/layers.json.js"] = [
 			{
 				"objectId": "9280A48C-AF03-49F3-8E9E-7CBF125775CD",
 				"kind": "group",
-				"name": "vendita2_appbar",
+				"name": "vendita3_appbar",
 				"maskFrame": null,
 				"layerFrame": {
 					"x": 0,
@@ -677,116 +851,12 @@ window.__imported__["DropPay Mockups - Android@3x/layers.json.js"] = [
 					"opacity": 1
 				},
 				"image": {
-					"path": "images/Layer-vendita2_appbar-oti4mee0.png",
+					"path": "images/Layer-vendita3_appbar-oti4mee0.png",
 					"frame": {
 						"x": 0,
 						"y": 0,
 						"width": 360,
 						"height": 60
-					}
-				},
-				"children": []
-			}
-		]
-	},
-	{
-		"objectId": "C1D9515B-601A-488D-8A30-C8BBFFF0E7B7",
-		"kind": "artboard",
-		"name": "vendita3",
-		"maskFrame": null,
-		"layerFrame": {
-			"x": 1400,
-			"y": 66,
-			"width": 360,
-			"height": 640
-		},
-		"visible": true,
-		"metadata": {},
-		"backgroundColor": "rgba(245, 245, 245, 1)",
-		"children": [
-			{
-				"objectId": "5E74FE5D-1DB8-40AE-9701-9711A184B4B2",
-				"kind": "text",
-				"name": "vendita3_label",
-				"maskFrame": null,
-				"layerFrame": {
-					"x": 112,
-					"y": 505,
-					"width": 136,
-					"height": 14
-				},
-				"visible": true,
-				"metadata": {
-					"opacity": 1,
-					"string": "Pagamento effettuato",
-					"css": [
-						"/* Pagamento effettuato: */",
-						"opacity: 0.87;",
-						"font-family: Roboto-Regular;",
-						"font-size: 14px;",
-						"color: rgba(0,0,0,0.87);",
-						"line-height: 16px;"
-					]
-				},
-				"image": {
-					"path": "images/Layer-vendita3_label-nuu3nezf.png",
-					"frame": {
-						"x": 112,
-						"y": 505,
-						"width": 136,
-						"height": 14
-					}
-				},
-				"children": []
-			},
-			{
-				"objectId": "0FC662AC-683D-4899-B4DC-0191E2072F2A",
-				"kind": "group",
-				"name": "vendita3_check",
-				"maskFrame": null,
-				"layerFrame": {
-					"x": 38,
-					"y": 178,
-					"width": 285,
-					"height": 287
-				},
-				"visible": true,
-				"metadata": {
-					"opacity": 1
-				},
-				"image": {
-					"path": "images/Layer-vendita3_check-mezdnjyy.png",
-					"frame": {
-						"x": 38,
-						"y": 178,
-						"width": 285,
-						"height": 287
-					}
-				},
-				"children": []
-			},
-			{
-				"objectId": "817314BB-C1A2-4176-8F67-6F5D75F55896",
-				"kind": "group",
-				"name": "vendita3_appbar",
-				"maskFrame": null,
-				"layerFrame": {
-					"x": -4,
-					"y": -4,
-					"width": 368,
-					"height": 92
-				},
-				"visible": true,
-				"metadata": {
-					"opacity": 1
-				},
-				"image": {
-					"path": "images/Layer-vendita3_appbar-ode3mze0.png",
-					"frame": {
-						"x": -4,
-						"y": -4,
-						"width": 368,
-						"height": 92
 					}
 				},
 				"children": []
