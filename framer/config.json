@@ -1,0 +1,22 @@
+{
+  "propertyPanelToggleStates" : {
+    "Filters" : false
+  },
+  "deviceOrientation" : 0,
+  "sharedPrototype" : 0,
+  "contentScale" : 1,
+  "deviceType" : "google-nexus-5x",
+  "selectedHand" : "",
+  "updateDelay" : 0.3,
+  "deviceScale" : "fit",
+  "foldedCodeRanges" : [
+    "{0, 230}",
+    "{231, 314}",
+    "{546, 823}",
+    "{1370, 666}",
+    "{2037, 175}",
+    "{2213, 891}"
+  ],
+  "orientation" : 0,
+  "fullScreen" : false
+}
