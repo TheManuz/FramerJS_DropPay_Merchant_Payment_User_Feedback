@@ -102,7 +102,27 @@ sketch.vendita2_back.onClick ->
 #Schermata 3 setup
 circlePulse = null
 
-for layer in [sketch.vendita3_QRcode, sketch.vendita3_check, sketch.vendita3_label_id, sketch.vendita3_label_info, sketch.vendita3_label_success]
+avatar = new Layer
+	width: Framer.Device.screen.width*0.618
+	height: Framer.Device.screen.width*0.618
+	backgroundColor: "white"
+	borderRadius: 12
+	shadowY: 8
+	shadowBlur: 16
+	shadowSpread: 4
+	shadowColor: "rgba(0, 0, 0, 0.24)"
+	superLayer: sketch.vendita3
+	midX: sketch.vendita3_QRcode.midX
+	midY: sketch.vendita3_QRcode.midY
+
+infoLabel = sketch.vendita3_label_info.convertToTextLayer()
+infoLabel.fontFamily = "Roboto"
+infoLabel.lineHeight *= 0.5
+infoLabel.fontSize *= 3
+infoLabel.fontWeight = 500 #Medium weight 
+infoLabel.autoSize = true
+
+for layer in [sketch.vendita3_QRcode, sketch.vendita3_check, sketch.vendita3_label_id, infoLabel, sketch.vendita3_label_success, avatar]
 	do (layer) ->
 		layer.states.add
 			hidden:
@@ -111,19 +131,68 @@ for layer in [sketch.vendita3_QRcode, sketch.vendita3_check, sketch.vendita3_lab
 			
 Views.onViewWillSwitch (oldView, newView) ->
 	if newView is sketch.vendita3
+		avatar.image = "images/avatar"+Utils.randomChoice([1..12])+".jpg"
+		avatar.states.add
+			default:
+				scale: 1
+				opacity: 1
+		
 		sketch.vendita3_check.states.switchInstant("hidden")
 		sketch.vendita3_QRcode.states.switchInstant("hidden")
 		sketch.vendita3_label_success.states.switchInstant("hidden")
+		avatar.states.switchInstant("hidden")
 		sketch.vendita3_label_id.states.switchInstant("default")
-		sketch.vendita3_label_info.states.switchInstant("default")
+		infoLabel.states.switchInstant("default")
 		sketch.vendita3_QRcode.states.switch("default", curve: "bezier-curve", curveOptions: [0.0, 0.0, 0.2, 1], time: 0.375)
 		Utils.delay 4, ->
-			sketch.vendita3_check.states.switch("default", curve: "bezier-curve", curveOptions: [0.0, 0.0, 0.2, 1], time: 0.375)
-			sketch.vendita3_label_success.states.switch("default", curve: "bezier-curve", curveOptions: [0.0, 0.0, 0.2, 1], time: 0.375)
 			sketch.vendita3_QRcode.states.switch("hidden", curve: "bezier-curve", curveOptions: [0.0, 0.0, 0.2, 1], time: 0.375)
 			sketch.vendita3_label_id.states.switch("hidden", curve: "bezier-curve", curveOptions: [0.0, 0.0, 0.2, 1], time: 0.375)
-			sketch.vendita3_label_info.states.switch("hidden", curve: "bezier-curve", curveOptions: [0.0, 0.0, 0.2, 1], time: 0.375)
-
+			avatar.states.switch("default", curve: "bezier-curve", curveOptions: [0.0, 0.0, 0.2, 1], time: 0.375)
+			infoLabel.text = "Attendi l'inserimento del PIN"
+			infoLabel.centerX()
+			
+			dotContainer = new Layer
+				backgroundColor: "transparent"
+				width: 80+80+48
+				y: avatar.maxY + 48
+				parent: sketch.vendita3
+			dotContainer.centerX()
+			dotDefaultDuration = 0.225
+			for i in [0..2]
+				do (i) ->
+					dot = new Layer
+						backgroundColor: "white"
+						width: 48
+						height: 48
+						borderRadius: 36
+						x: (120 * i)
+						scale: 0
+						parent: dotContainer
+					Utils.delay (dotDefaultDuration * i * 0.8), () ->
+						zoomAnim = dot.animate
+							properties:
+								scale: 1
+							curve: "bezier-curve"
+							curveOptions: [0.4, 0.0, 0.2, 1]
+							time: dotDefaultDuration
+							delay: dotDefaultDuration
+						zoomAnim.onAnimationEnd ->
+							scaleAnim = dot.animate
+								properties:
+									scale: 0
+								curve: "bezier-curve"
+								curveOptions: [0.4, 0.0, 1, 1]
+								time: dotDefaultDuration
+							scaleAnim.onAnimationEnd ->
+								zoomAnim.start()
+								
+			Utils.delay 6, ->
+				sketch.vendita3_check.states.switch("default", curve: "bezier-curve", curveOptions: [0.0, 0.0, 0.2, 1], time: 0.375)
+				sketch.vendita3_label_success.states.switch("default", curve: "bezier-curve", curveOptions: [0.0, 0.0, 0.2, 1], time: 0.375)
+				avatar.states.switch("hidden", curve: "bezier-curve", curveOptions: [0.0, 0.0, 0.2, 1], time: 0.375);
+				infoLabel.states.switch("hidden", curve: "bezier-curve", curveOptions: [0.0, 0.0, 0.2, 1], time: 0.375)
+				dotContainer.destroy()
+			
 Views.onViewDidSwitch (oldView, newView) ->
 	if newView is sketch.vendita3
 		circlePulse = new Layer
@@ -151,3 +220,7 @@ Views.onViewDidSwitch (oldView, newView) ->
 sketch.vendita3_close.onClick ->
 	Views.back()
 	circlePulse.destroy()
+
+
+#Test directly the 3rd screen
+#Views.androidPushIn(sketch.vendita3)
