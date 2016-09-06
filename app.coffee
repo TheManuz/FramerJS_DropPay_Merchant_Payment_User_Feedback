@@ -21,7 +21,7 @@ AndroidRipple = require 'androidRipple'
 # Import file "DropPay Mockups - Android" (sizes and positions are scaled 1:3)
 sketch = Framer.Importer.load("imported/DropPay Mockups - Android@3x")
 
-
+Framer.Device.contentScale = 1
 
 #Init amount textlayer
 amount = sketch.vendita1_textfield_amount.convertToTextLayer()
@@ -138,6 +138,7 @@ Views.onViewDidSwitch (oldView, newView) ->
 			opacity: 1
 			superLayer: sketch.vendita3
 			scale: 0.44
+		circlePulse.placeBehind(sketch.vendita3_QRcode)
 		circlePulse.animate
 			properties:
 				scale: 1
