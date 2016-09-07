@@ -114,6 +114,7 @@ avatar = new Layer
 	superLayer: sketch.vendita3
 	midX: sketch.vendita3_QRcode.midX
 	midY: sketch.vendita3_QRcode.midY
+avatar.placeBefore(sketch.vendita3_QRcode)
 
 infoLabel = sketch.vendita3_label_info.convertToTextLayer()
 infoLabel.fontFamily = "Roboto"
@@ -122,7 +123,39 @@ infoLabel.fontSize *= 3
 infoLabel.fontWeight = 500 #Medium weight 
 infoLabel.autoSize = true
 
-for layer in [sketch.vendita3_QRcode, sketch.vendita3_check, sketch.vendita3_label_id, infoLabel, sketch.vendita3_label_success, avatar]
+circularMaskDiameter = 736*3
+greenScreen = new Layer
+	originX: 0.5
+	originY: 0.5 
+	width: circularMaskDiameter
+	height: circularMaskDiameter
+	backgroundColor: "rgb(126,211,33)"
+	parent: sketch.vendita3
+	borderRadius: "50%"
+	clip: true
+greenScreen.placeBefore(avatar)
+greenScreen.states.add
+	hidden:
+		x: Framer.Device.screen.width*0.5
+		y: Framer.Device.screen.height*0.5
+		width: 0
+		height: 0
+	grown:
+		x: (Framer.Device.screen.width-circularMaskDiameter)*0.5
+		y: (Framer.Device.screen.height-circularMaskDiameter)*0.5
+		width: circularMaskDiameter
+		height: circularMaskDiameter
+
+sketch.vendita3_check.setParent(greenScreen)
+sketch.vendita3_check.center()
+
+sketch.vendita3_check.states.add
+	hidden:
+		scale: 0
+		x: -sketch.vendita3_check.width/2
+		y: -sketch.vendita3_check.height/2
+		
+for layer in [sketch.vendita3_QRcode, infoLabel, avatar]
 	do (layer) ->
 		layer.states.add
 			hidden:
@@ -137,16 +170,14 @@ Views.onViewWillSwitch (oldView, newView) ->
 				scale: 1
 				opacity: 1
 		
+		greenScreen.states.switchInstant("hidden")
 		sketch.vendita3_check.states.switchInstant("hidden")
 		sketch.vendita3_QRcode.states.switchInstant("hidden")
-		sketch.vendita3_label_success.states.switchInstant("hidden")
 		avatar.states.switchInstant("hidden")
-		sketch.vendita3_label_id.states.switchInstant("default")
 		infoLabel.states.switchInstant("default")
 		sketch.vendita3_QRcode.states.switch("default", curve: "bezier-curve", curveOptions: [0.0, 0.0, 0.2, 1], time: 0.375)
 		Utils.delay 4, ->
 			sketch.vendita3_QRcode.states.switch("hidden", curve: "bezier-curve", curveOptions: [0.0, 0.0, 0.2, 1], time: 0.375)
-			sketch.vendita3_label_id.states.switch("hidden", curve: "bezier-curve", curveOptions: [0.0, 0.0, 0.2, 1], time: 0.375)
 			avatar.states.switch("default", curve: "bezier-curve", curveOptions: [0.0, 0.0, 0.2, 1], time: 0.375)
 			infoLabel.text = "Attendi l'inserimento del PIN"
 			infoLabel.centerX()
@@ -187,10 +218,11 @@ Views.onViewWillSwitch (oldView, newView) ->
 								zoomAnim.start()
 								
 			Utils.delay 6, ->
-				sketch.vendita3_check.states.switch("default", curve: "bezier-curve", curveOptions: [0.0, 0.0, 0.2, 1], time: 0.375)
-				sketch.vendita3_label_success.states.switch("default", curve: "bezier-curve", curveOptions: [0.0, 0.0, 0.2, 1], time: 0.375)
-				avatar.states.switch("hidden", curve: "bezier-curve", curveOptions: [0.0, 0.0, 0.2, 1], time: 0.375);
-				infoLabel.states.switch("hidden", curve: "bezier-curve", curveOptions: [0.0, 0.0, 0.2, 1], time: 0.375)
+				sketch.vendita3_check.states.switch("default", curve: "bezier-curve", curveOptions: [0.0, 0.0, 0.2, 1], time: 0.425)
+				greenScreen.states.switch("grown", curve: "bezier-curve", curveOptions: [0.0, 0.0, 0.2, 1], time: 0.425)
+				#avatar.states.switch("hidden", curve: "bezier-curve", curveOptions: [0.0, 0.0, 0.2, 1], time: 0.375);
+				infoLabel.text = "Pagamento effettuato"
+				infoLabel.centerX()
 				dotContainer.destroy()
 			
 Views.onViewDidSwitch (oldView, newView) ->
