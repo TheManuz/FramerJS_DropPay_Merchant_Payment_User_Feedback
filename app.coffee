@@ -9,6 +9,27 @@ Framer.Info =
 	description: ""
 
 
+#Define custom device
+Framer.DeviceView.Devices["custom"] =
+	"deviceType": "phone"
+	"screenWidth": 720
+	"screenHeight": 1280
+	"deviceImage": "images/nexus5_for_framer.png"
+	"deviceImageWidth": 1211
+	"deviceImageHeight": 1687
+	
+# Set custom device
+Framer.Device.deviceType = "custom"
+
+Framer.Device.background.backgroundColor = "rgb(242,242,242)"
+Framer.Device.contentScale = 1
+Framer.Device.deviceScale = 0.5
+
+# Import file "DropPay Mockups - Android" (sizes and positions are scaled 1:3)
+sketch = Framer.Importer.load("imported/DropPay Mockups - Android@2x")
+
+Utils.globalLayers(sketch)
+
 #Module Imports
 TextLayer = require 'TextLayer'
 
@@ -18,20 +39,12 @@ Pointer = require 'Pointer'
 
 AndroidRipple = require 'androidRipple'
 
-# Import file "DropPay Mockups - Android" (sizes and positions are scaled 1:3)
-sketch = Framer.Importer.load("imported/DropPay Mockups - Android@3x")
-
-Framer.Device.contentScale = 1
-
 #Init amount textlayer
-amount = sketch.vendita1_textfield_amount.convertToTextLayer()
-amount.fontFamily = "Roboto"
-amount.lineHeight *= 0.5
-amount.fontSize *= 3
+amount = vendita1_textfield_amount.convertToTextLayer()
 amount.fontWeight = 500 #Medium weight 
 amount.autoSize = true
 
-currency = sketch.vendita1_label_currency
+currency = vendita1_label_currency
 
 typeAmount = (value) ->
 	if (amount.text is 0)
@@ -62,7 +75,7 @@ amount.text = "0"
 merchantBlue = "#18A8F0"
 
 #Numeric keys callback
-for key in sketch.numeric_keypad.children
+for key in numeric_keypad.children
 	do (key) ->
 		key.onClick ->
 			if (amount.text.length is 1 and amount.text.charAt(0) is "0")
@@ -72,32 +85,52 @@ for key in sketch.numeric_keypad.children
 		key.on(Events.Click, AndroidRipple.Ripple)
 		key.rippleColor = merchantBlue
 
-sketch.comma.on(Events.Click, AndroidRipple.Ripple)
-sketch.comma.rippleColor = merchantBlue
-sketch.comma.onClick ->
+comma.on(Events.Click, AndroidRipple.Ripple)
+comma.rippleColor = merchantBlue
+comma.onClick ->
 	if (amount.text.indexOf(",") == -1)
 		typeAmount(",")
 	
-sketch.del.on(Events.Click, AndroidRipple.Ripple)
-sketch.del.rippleColor = merchantBlue
-sketch.del.onClick ->
+del.on(Events.Click, AndroidRipple.Ripple)
+del.rippleColor = merchantBlue
+del.onClick ->
 	deleteChar()
 
 #ViewController initializing
 Views = new ViewController
-    initialView: sketch.vendita1
+    initialView: vendita1
 
-sketch.navbar.bringToFront()
+navbar.bringToFront()
 
-sketch.vendita1_button.onClick -> Views.androidPushIn(sketch.vendita2)
+vendita1_button.onClick -> Views.androidPushIn(vendita2)
 
 #Schermata 2 setup
-for key in sketch.vendita2_bottomsheet_grid.children
+for key in vendita2_bottomsheet_grid.children
 	do (key) ->
-		key.onClick -> Views.zoomIn(sketch.vendita3)
+		key.onClick -> Views.zoomIn(vendita3)
 		
-sketch.vendita2_back.onClick ->
+vendita2_back.onClick ->
 	Views.back()
+	
+descriptionInput = vendita2_label_description.convertToTextLayer()
+
+descriptionHint = descriptionInput.copy()
+descriptionHint.parent = vendita2_fields
+
+descriptionInput.text = ""
+descriptionInput.on(Events.Click, AndroidRipple.Ripple)
+descriptionInput.rippleColor = merchantBlue
+descriptionInput.color = "black"
+descriptionInput.width = 272*2
+descriptionInput.height = 48*2
+descriptionInput.contentEditable = true
+descriptionInput.setup = true
+
+descriptionInput.addListener "input" , () ->
+	if (descriptionInput.text.length is 0)
+		descriptionHint.visible = true
+	else
+		descriptionHint.visible = false
 
 #Schermata 3 setup
 circlePulse = null
@@ -111,26 +144,24 @@ avatar = new Layer
 	shadowBlur: 16
 	shadowSpread: 4
 	shadowColor: "rgba(0, 0, 0, 0.24)"
-	superLayer: sketch.vendita3
-	midX: sketch.vendita3_QRcode.midX
-	midY: sketch.vendita3_QRcode.midY
-avatar.placeBefore(sketch.vendita3_QRcode)
+	superLayer: vendita3
+	midX: vendita3_QRcode.midX
+	midY: vendita3_QRcode.midY
+avatar.placeBefore(vendita3_QRcode)
 
-infoLabel = sketch.vendita3_label_info.convertToTextLayer()
-infoLabel.fontFamily = "Roboto"
-infoLabel.lineHeight *= 0.5
-infoLabel.fontSize *= 3
+infoLabel = vendita3_label_info.convertToTextLayer()
 infoLabel.fontWeight = 500 #Medium weight 
 infoLabel.autoSize = true
 
-circularMaskDiameter = 736*3
+circularMaskDiameter = Math.pow(Math.pow(Framer.Device.screen.width, 2)+Math.pow(Framer.Device.screen.height, 2), 0.5)
+
 greenScreen = new Layer
 	originX: 0.5
 	originY: 0.5 
 	width: circularMaskDiameter
 	height: circularMaskDiameter
 	backgroundColor: "rgb(126,211,33)"
-	parent: sketch.vendita3
+	parent: vendita3
 	borderRadius: "50%"
 	clip: true
 greenScreen.placeBefore(avatar)
@@ -146,16 +177,16 @@ greenScreen.states.add
 		width: circularMaskDiameter
 		height: circularMaskDiameter
 
-sketch.vendita3_check.setParent(greenScreen)
-sketch.vendita3_check.center()
+vendita3_check.setParent(greenScreen)
+vendita3_check.center()
 
-sketch.vendita3_check.states.add
+vendita3_check.states.add
 	hidden:
 		scale: 0
-		x: -sketch.vendita3_check.width/2
-		y: -sketch.vendita3_check.height/2
+		x: -vendita3_check.width/2
+		y: -vendita3_check.height/2
 		
-for layer in [sketch.vendita3_QRcode, infoLabel, avatar]
+for layer in [vendita3_QRcode, infoLabel, avatar]
 	do (layer) ->
 		layer.states.add
 			hidden:
@@ -163,7 +194,7 @@ for layer in [sketch.vendita3_QRcode, infoLabel, avatar]
 				opacity: 0
 			
 Views.onViewWillSwitch (oldView, newView) ->
-	if newView is sketch.vendita3
+	if newView is vendita3
 		avatar.image = "images/avatar"+Utils.randomChoice([1..12])+".jpg"
 		avatar.states.add
 			default:
@@ -171,22 +202,22 @@ Views.onViewWillSwitch (oldView, newView) ->
 				opacity: 1
 		
 		greenScreen.states.switchInstant("hidden")
-		sketch.vendita3_check.states.switchInstant("hidden")
-		sketch.vendita3_QRcode.states.switchInstant("hidden")
+		vendita3_check.states.switchInstant("hidden")
+		vendita3_QRcode.states.switchInstant("hidden")
 		avatar.states.switchInstant("hidden")
 		infoLabel.states.switchInstant("default")
-		sketch.vendita3_QRcode.states.switch("default", curve: "bezier-curve", curveOptions: [0.0, 0.0, 0.2, 1], time: 0.375)
+		vendita3_QRcode.states.switch("default", curve: "bezier-curve", curveOptions: [0.0, 0.0, 0.2, 1], time: 0.375)
 		Utils.delay 4, ->
-			sketch.vendita3_QRcode.states.switch("hidden", curve: "bezier-curve", curveOptions: [0.0, 0.0, 0.2, 1], time: 0.375)
+			vendita3_QRcode.states.switch("hidden", curve: "bezier-curve", curveOptions: [0.0, 0.0, 0.2, 1], time: 0.375)
 			avatar.states.switch("default", curve: "bezier-curve", curveOptions: [0.0, 0.0, 0.2, 1], time: 0.375)
 			infoLabel.text = "Attendi l'inserimento del PIN"
 			infoLabel.centerX()
 			
 			dotContainer = new Layer
 				backgroundColor: "transparent"
-				width: 80+80+48
+				width: 120+120+48
 				y: avatar.maxY + 48
-				parent: sketch.vendita3
+				parent: vendita3
 			dotContainer.centerX()
 			dotDefaultDuration = 0.225
 			for i in [0..2]
@@ -195,7 +226,7 @@ Views.onViewWillSwitch (oldView, newView) ->
 						backgroundColor: "white"
 						width: 48
 						height: 48
-						borderRadius: 36
+						borderRadius: "50%"
 						x: (120 * i)
 						scale: 0
 						parent: dotContainer
@@ -218,7 +249,7 @@ Views.onViewWillSwitch (oldView, newView) ->
 								zoomAnim.start()
 								
 			Utils.delay 6, ->
-				sketch.vendita3_check.states.switch("default", curve: "bezier-curve", curveOptions: [0.0, 0.0, 0.2, 1], time: 0.425)
+				vendita3_check.states.switch("default", curve: "bezier-curve", curveOptions: [0.0, 0.0, 0.2, 1], time: 0.425)
 				greenScreen.states.switch("grown", curve: "bezier-curve", curveOptions: [0.0, 0.0, 0.2, 1], time: 0.425)
 				#avatar.states.switch("hidden", curve: "bezier-curve", curveOptions: [0.0, 0.0, 0.2, 1], time: 0.375);
 				infoLabel.text = "Pagamento effettuato"
@@ -226,20 +257,19 @@ Views.onViewWillSwitch (oldView, newView) ->
 				dotContainer.destroy()
 			
 Views.onViewDidSwitch (oldView, newView) ->
-	if newView is sketch.vendita3
+	if newView is vendita3
 		circlePulse = new Layer
 			name: "circlePulse"
-			x: -560
-			y: -155
-			z: -1
-			width: 2200
-			height: 2200
-			borderRadius: 1100
+			x: (Framer.Device.screen.width-circularMaskDiameter)*0.5
+			y: (Framer.Device.screen.height-circularMaskDiameter)*0.5
+			width: circularMaskDiameter
+			height: circularMaskDiameter
+			borderRadius: "50%"
 			backgroundColor: "rgba(255,255,255,1)"
 			opacity: 1
-			superLayer: sketch.vendita3
+			superLayer: vendita3
 			scale: 0.44
-		circlePulse.placeBehind(sketch.vendita3_QRcode)
+		circlePulse.placeBehind(vendita3_QRcode)
 		circlePulse.animate
 			properties:
 				scale: 1
@@ -249,10 +279,10 @@ Views.onViewDidSwitch (oldView, newView) ->
 			repeat: 1
 			time: 2
 			
-sketch.vendita3_close.onClick ->
+vendita3_close.onClick ->
 	Views.back()
 	circlePulse.destroy()
 
 
 #Test directly the 3rd screen
-#Views.androidPushIn(sketch.vendita3)
+#Views.androidPushIn(vendita3)
